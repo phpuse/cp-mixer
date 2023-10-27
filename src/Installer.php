@@ -11,8 +11,8 @@ use Composer\Package\PackageInterface;
 use Composer\Repository\InstalledRepositoryInterface;
 use Composer\Util\Filesystem;
 use PhpUse\Mixer\Installers\BaseInstaller;
-use PhpUse\Mixer\Installers\LaraEaseInstaller;
-use PhpUse\Mixer\Installers\WordPressInstaller;
+use PhpUse\Mixer\Installers\LaralibInstaller;
+use PhpUse\Mixer\Installers\WordpressInstaller;
 use React\Promise\PromiseInterface;
 
 class Installer extends LibraryInstaller
@@ -23,8 +23,8 @@ class Installer extends LibraryInstaller
      * @var array<string, string>
      */
     private array $supportedTypes = [
-        'laraease' => LaraEaseInstaller::class,
-        'wordpress' => WordPressInstaller::class
+        'laralib' => LaralibInstaller::class,
+        'wordpress' => WordpressInstaller::class
     ];
 
     /**

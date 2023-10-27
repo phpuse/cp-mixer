@@ -2,11 +2,11 @@
 
 namespace PhpUse\Mixer\Installers;
 
-class LaraEaseInstaller extends BaseInstaller
+class LaralibInstaller extends BaseInstaller
 {
     /** @var array<string, string> */
     protected array $locations = [
         'lamo'    => 'lamo/{$name}/',
-        'lalib' => 'lalib/{$name}/',
+        'lause' => 'lause/{$name}/',
     ];
 }
