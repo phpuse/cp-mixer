@@ -8,5 +8,6 @@ class LaralibInstaller extends BaseInstaller
     protected array $locations = [
         'lamo'    => 'lamo/{$name}/',
         'lause' => 'lause/{$name}/',
+        'layer' => '{$name}/',
     ];
 }
