@@ -53,6 +53,7 @@ class Installer extends LibraryInstaller
      */
     public function getInstallPath(PackageInterface $package): string
     {
+        var_dump('xxxxxxxx plugin mixer getInstallPath');
         $type = $package->getType();
         $frameworkType = $this->findFrameworkType($type);
 
