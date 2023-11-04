@@ -35,6 +35,7 @@ abstract class BaseInstaller
         $type = $this->package->getType();
 
         $prettyName = $this->package->getPrettyName();
+
         if (str_contains($prettyName, '/')) {
             list($vendor, $name) = explode('/', $prettyName);
         } else {

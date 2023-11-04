@@ -12,7 +12,7 @@ class Plugin implements PluginInterface
     private Installer $installer;
 
     /**
-     * @param Composer $composer 项目的 composer 文件对于的类
+     * @param Composer $composer 项目的 composer 文件 对应的类
      * @param IOInterface $io
      * @return void
      */

@@ -4,6 +4,7 @@ Composer Plugin
 
 - https://getcomposer.org/doc/articles/plugins.md
 
+## 使用
 
 在 `composer.json` 中添加
 
@@ -15,3 +16,5 @@ Composer Plugin
 
 "phpuse/mixer": "dev-main",
 ```
+
+## 解决问题
