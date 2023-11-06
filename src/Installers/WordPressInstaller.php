@@ -2,7 +2,7 @@
 
 namespace PhpUse\Mixer\Installers;
 
-class WordpressInstaller extends BaseInstaller
+class WordPressInstaller extends BaseInstaller
 {
     /** @var array<string, string> */
     protected array $locations = [

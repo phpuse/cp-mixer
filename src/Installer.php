@@ -12,7 +12,7 @@ use Composer\Repository\InstalledRepositoryInterface;
 use Composer\Util\Filesystem;
 use PhpUse\Mixer\Installers\BaseInstaller;
 use PhpUse\Mixer\Installers\LaralibInstaller;
-use PhpUse\Mixer\Installers\WordpressInstaller;
+use PhpUse\Mixer\Installers\WordPressInstaller;
 use React\Promise\PromiseInterface;
 
 class Installer extends LibraryInstaller
@@ -24,7 +24,7 @@ class Installer extends LibraryInstaller
      */
     private array $supportedTypes = [
         'laralib' => LaralibInstaller::class,
-        'wordpress' => WordpressInstaller::class
+        'wordpress' => WordPressInstaller::class
     ];
 
     /**
