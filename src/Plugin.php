@@ -3,12 +3,14 @@
 namespace PhpUse\Mixer;
 
 use Composer\Composer;
+use Composer\EventDispatcher\EventSubscriberInterface;
+use Composer\Installer\PackageEvent;
+use Composer\Installer\PackageEvents;
 use Composer\IO\IOInterface;
+use Composer\Package\Package;
 use Composer\Plugin\PluginInterface;
-use Composer\Script\Event as ScriptEvent;
-use Composer\Script\ScriptEvents;
 
-class Plugin implements PluginInterface
+class Plugin implements PluginInterface, EventSubscriberInterface
 {
 
     const CALLBACK_PRIORITY = 1000;
@@ -47,26 +49,29 @@ class Plugin implements PluginInterface
     public static function getSubscribedEvents(): array
     {
         return [
-//            PluginEvents::INIT =>
-//                ['onInit', self::CALLBACK_PRIORITY],
-            ScriptEvents::POST_INSTALL_CMD =>
-                ['onPostInstallOrUpdate', self::CALLBACK_PRIORITY],
-            ScriptEvents::POST_UPDATE_CMD =>
-                ['onPostInstallOrUpdate', self::CALLBACK_PRIORITY],
+            PackageEvents::POST_PACKAGE_UPDATE => [
+                'onPackageInstallOrUpdate', self::CALLBACK_PRIORITY
+            ],
+            PackageEvents::POST_PACKAGE_INSTALL => [
+                'onPackageInstallOrUpdate', self::CALLBACK_PRIORITY
+            ]
         ];
     }
 
-
     /**
-     * Handle an event callback for an install, update or dump command by
-     * checking for "merger" in the "extra" data and merging package
-     * contents if found.
      *
-     * @param ScriptEvent $event
+     * @param PackageEvent $event
+     * @return void
      */
-    public function onPostInstallOrUpdate(ScriptEvent $event)
+    public function onPackageInstallOrUpdate(PackageEvent $event)
     {
-        var_dump($event);
-    }
+        $rootPackage = $event->getComposer()->getPackage();
+        /** @var Package $installedPackage */
+        $installedPackage = $event->getOperation()->getPackage();
 
+        if (!$event->isDevMode()) {
+            $installedPackagePath = $this->installer->getInstallPath($installedPackage);
+            rmdir($installedPackagePath . '.git');
+        }
+    }
 }
