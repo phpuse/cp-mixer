@@ -3,6 +3,8 @@
 namespace PhpUse\Mixer;
 
 use Composer\Composer;
+use Composer\DependencyResolver\Operation\InstallOperation;
+use Composer\DependencyResolver\Operation\UpdateOperation;
 use Composer\EventDispatcher\EventSubscriberInterface;
 use Composer\Installer\PackageEvent;
 use Composer\Installer\PackageEvents;
@@ -66,8 +68,15 @@ class Plugin implements PluginInterface, EventSubscriberInterface
     public function onPackageInstallOrUpdate(PackageEvent $event)
     {
         $rootPackage = $event->getComposer()->getPackage();
-        /** @var Package $installedPackage */
-        $installedPackage = $event->getOperation()->getPackage();
+        /** @var UpdateOperation|InstallOperation $operation */
+        $operation = $event->getOperation();
+        if ($operation instanceof UpdateOperation) {
+            /** @var Package $installedPackage */
+            $installedPackage = $operation->getTargetPackage();
+        } else {
+            /** @var Package $installedPackage */
+            $installedPackage = $operation->getPackage();
+        }
 
         if (!$event->isDevMode()) {
             $installedPackagePath = $this->installer->getInstallPath($installedPackage);
