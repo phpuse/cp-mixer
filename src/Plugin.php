@@ -52,11 +52,11 @@ class Plugin implements PluginInterface, EventSubscriberInterface
     {
         return [
             PackageEvents::POST_PACKAGE_UPDATE => [
-                'onPackageInstallOrUpdate', self::CALLBACK_PRIORITY
+                'onPostPackage', self::CALLBACK_PRIORITY
             ],
             PackageEvents::POST_PACKAGE_INSTALL => [
-                'onPackageInstallOrUpdate', self::CALLBACK_PRIORITY
-            ]
+                'onPostPackage', self::CALLBACK_PRIORITY
+            ],
         ];
     }
 
@@ -65,7 +65,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
      * @param PackageEvent $event
      * @return void
      */
-    public function onPackageInstallOrUpdate(PackageEvent $event)
+    public function onPostPackage(PackageEvent $event)
     {
         $rootPackage = $event->getComposer()->getPackage();
         /** @var UpdateOperation|InstallOperation $operation */
@@ -77,10 +77,11 @@ class Plugin implements PluginInterface, EventSubscriberInterface
             /** @var Package $installedPackage */
             $installedPackage = $operation->getPackage();
         }
-
-        if (!$event->isDevMode()) {
-            $installedPackagePath = $this->installer->getInstallPath($installedPackage);
-            rmdir($installedPackagePath . '.git');
-        }
+//       @todo 写个脚本实现
+//        if (!$event->isDevMode()) {
+//            $installedPackagePath = $this->installer->getInstallPath($installedPackage);
+//            var_dump($installedPackagePath);
+//            exec("rm -rf " . $installedPackagePath . '.git');
+//        }
     }
 }
