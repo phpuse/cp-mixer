@@ -16,10 +16,10 @@
     },
     "require": {
         "php": "^8.2",
-        "composer/composer": "^2.5",
         "composer-plugin-api": "^2.0"
     },
     "require-dev": {
+        "composer/composer": "^2.5"
     },
     "extra": {
         "class": "PhpUse\\Mixer\\Plugin",
